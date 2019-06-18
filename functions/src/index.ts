@@ -1,8 +1,10 @@
+/// <reference path="../airtable.d.ts" />
+
 import * as functions from 'firebase-functions';
-import * as Airtable from 'airtable';
+import { airtable } from 'airtable';
 
 
-const base = new Airtable({apiKey: 'keyfVnG5zIX3QPaqa' }).base('appQeSXJABkUlar3x');
+const base: airtable.Airtable.Base = new airtable.Airtable({apiKey: 'keyfVnG5zIX3QPaqa' }).base('appQeSXJABkUlar3x');
 
 
 export const addToAirtable = functions.firestore
@@ -11,5 +13,6 @@ export const addToAirtable = functions.firestore
     const data = snap.data();
     console.log(data);
     // Add the data to the Airtable Base
-    return base('CustomerData').create(data)
+    // return base.table('CustomerData').create(data)
+    return base.table('CustomerData').create(data);
 });
